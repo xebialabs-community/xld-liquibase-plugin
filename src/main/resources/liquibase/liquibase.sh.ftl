@@ -7,6 +7,19 @@
 -->
 #!/bin/sh
 <#assign options = ""> 
+
+<#if deployed.container.databaseUsername??>
+  <#assign options = options + " --username=${deployed.container.databaseUsername} --password=${deployed.container.databasePassword}">
+</#if>
+
+<#if deployed.container.databaseJDBCURL??>
+  <#assign options = options + " --url=${deployed.container.databaseJDBCURL}">
+</#if>
+
+<#if deployed.container.databaseJDBCDriver??>
+  <#assign options = options + " --driver=${deployed.container.databaseJDBCDriver}">
+</#if>
+
 <#if deployed.container.liquibaseConfigurationPath??>
   <#assign options = options + " --defaultsFile=${deployed.container.liquibaseConfigurationPath}"> 
 </#if>

@@ -20,13 +20,17 @@
     <type type="liquibase.Runner" extends="generic.Container" description="Liquibase runner">
         <property name="updateScript"  hidden="true" default="liquibase/liquibase" />
 		<property name="testScript"  hidden="true" default="liquibase/test" />
-		<property name="liquibaseConfigurationPath" default="liquibase.properties"/>
-		<property name="liquibaseJarPath" default="liquibase.jar"/>
+		<property name="databaseUsername" required="false"/>
+		<property name="databasePassword" password="true" required="false"/>
+		<property name="databaseJDBCURL" label="Database URL" required="false"/>
+		<property name="databaseJDBCDriver" label="Database Driver" required="false"/>
 		<property name="liquibaseExtraArguments" description="Use to pass extra arguments to the liquibase command." required="false"/>
+		<property name="liquibaseConfigurationPath" required="false" default="liquibase.properties"/>
+		<property name="liquibaseJarPath" default="liquibase.jar"/>
 		<property name="javaCmd" default="java"/>
 		<property name="driverClasspath" required="false"/>
 		<property name="generatedSqlPath" required="false"/>
-		<method name="test" description="Test liquibase installation"/>          
+		<method name="test" label="Test Liquibase" description="Test liquibase installation"/>          
     </type> 
 
 </synthetic>

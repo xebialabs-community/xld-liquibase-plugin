@@ -7,14 +7,27 @@
 -->
 
 <#assign options = "">
+
+<#if deployed.container.databaseUsername??>
+  <#assign options = options + " --username=${deployed.container.databaseUsername} --password=${deployed.container.databasePassword}">
+</#if>
+
+<#if deployed.container.databaseJDBCURL??>
+  <#assign options = options + " --url=${deployed.container.databaseJDBCURL}">
+</#if>
+
+<#if deployed.container.databaseJDBCDriver??>
+  <#assign options = options + " --driver=${deployed.container.databaseJDBCDriver}">
+</#if>
+
 <#if deployed.container.liquibaseConfigurationPath??>
-  <#assign options = options + " --defaultsFile=${deployed.container.liquibaseConfigurationPath}"> 
+  <#assign options = options + " --defaultsFile=${deployed.container.liquibaseConfigurationPath}">
 </#if>
 <#if deployed.container.driverClasspath??>
   <#assign options = options + " --classpath=${deployed.container.driverClasspath}"> 
 </#if>
 <#if deployed.container.liquibaseExtraArguments??>
-  <#assign options = options + " ${deployed.container.liquibaseExtraArguments}"> 
+  <#assign options = options + " ${deployed.liquibaseExtraArguments}"> 
 </#if>
 cd "${step.uploadedArtifactPath}"
 
