@@ -30,7 +30,7 @@ This is the "container" of the liquibase plugin. A liquibase.Runner instance rep
 * *databaseUsername*: username for the database to connect to (when left out it will use the value in the properties file)
 * *databasePassword*: password for the specified username (when left out it will use the value in the properties file)
 * *databaseJDBCURL*: JDBC connection URL (when left out it will use the value in the properties file)
-* *databaseJDBCDriver: name of the JDBC driver to use (when left out it will use the value in the properties file)
+* *databaseJDBCDriver*: name of the JDBC driver to use (when left out it will use the value in the properties file)
 * *liquibaseJarPath*: path to the main liquibase jar file, i.e. liquibase.jar
 * *liquibaseConfigurationPath*: path to the liquibase configuration file, i.e liquibase.properties
 * *javaCmd*: command that will be used to launch liquibase java process. Default is "java"
