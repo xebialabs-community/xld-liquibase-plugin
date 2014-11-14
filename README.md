@@ -12,8 +12,8 @@ This is a simple integration where SQL rollbacks are not handled yet.
 ## Requirements
 
 * **Deployit requirements**
-	* **Deployit**: version 3.8+
-	* **Other Deployit Plugins**: None
+	* **Deployit**: version 4.5.2+
+	* **Other XL Deploy Plugins**: None
 
 ## Installation
 
