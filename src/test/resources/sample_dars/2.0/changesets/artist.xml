@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog 
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog" 
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.2.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd"
+    logicalFilePath="artist">
+    
+    <changeSet logicalFilePath="path-independent"  author="juanse.perez" id="add-category-to-project">
+        <addColumn tableName="project">
+            <column name="category_name" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+    
+    <changeSet logicalFilePath="path-independent"  author="juanse.perez" id="update-category_name">
+       <sql stripComments="true">  
+            UPDATE project 
+                   JOIN 
+                   category ON project.category_id = category.id
+            SET project.category_name = category.name
+         </sql>
+        <rollback></rollback>
+    </changeSet>
+
+    <changeSet logicalFilePath="path-independent"  author="juanse.perez" id="drop_foreign_key">
+        <dropForeignKeyConstraint baseTableName="project" constraintName="project_x_category"/>
+        <dropColumn columnName="category_id" tableName="project"/>
+        <rollback>
+            <addColumn tableName="project">
+                <column name="category_id" type="INT(10)"/>
+            </addColumn>
+            <sql stripComments="true">
+                UPDATE project
+                JOIN
+                category ON project.category_name = category.name
+                SET project.category_id = category.id
+            </sql>
+            <addForeignKeyConstraint baseColumnNames="category_id" baseTableName="project" constraintName="project_x_category" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="category"/>
+            <dropView viewName="complete_project"/>
+            <createView viewName="complete_project">(select `project`.`id` AS `id`,`project`.`name` AS `name`,`category`.`name` AS `category`,`project_data`.`description` AS `description` from ((`project` join `project_data` on((`project_data`.`project_id` = `project`.`id`))) join `category` on((`project`.`category_id` = `category`.`id`))))</createView>
+        </rollback>
+    </changeSet>
+
+    <changeSet logicalFilePath="path-independent"  author="juanse.perez" id="rebuild_view">
+        <dropView viewName="complete_project"/>        
+        <createView viewName="complete_project">
+            SELECT `project`.`id` AS `id`,
+                   `project`.`name` AS `name`,
+                   `project`.`category_name` AS `category`,
+                   `project_data`.`description` AS `description`
+            FROM `project` join 
+                 `project_data` ON `project_data`.`project_id` = `project`.`id`
+        </createView>
+        <rollback></rollback>
+    </changeSet>
+            
+</databaseChangeLog>

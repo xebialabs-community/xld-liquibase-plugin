@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.2.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd"
+                   logicalFilePath="initsampledata">
+
+    <changeSet logicalFilePath="path-independent"  author="juanse.perez" id="1403012125395-2">
+        <insert tableName="project">
+            <column name="id" valueNumeric="1"/>
+            <column name="name" value="project guitar"/>
+            <column name="category_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="project">
+            <column name="id" valueNumeric="2"/>
+            <column name="name" value="mayhem"/>
+            <column name="category_id" valueNumeric="5"/>
+        </insert>
+        <rollback>delete from project where id=1 or id=2</rollback>
+    </changeSet>
+    <changeSet logicalFilePath="path-independent"  author="juanse.perez" id="1403012125395-3">
+        <insert tableName="project_data">
+            <column name="id" valueNumeric="1"/>
+            <column name="description" value="a very nice project"/>
+            <column name="project_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="project_data">
+            <column name="id" valueNumeric="2"/>
+            <column name="description" value="dont talk about it"/>
+            <column name="project_id" valueNumeric="2"/>
+        </insert>
+        <rollback>delete from project_data where id=1 or id=2</rollback>
+    </changeSet>
+</databaseChangeLog>

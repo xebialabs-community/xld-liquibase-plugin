@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.2.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd"
+                   logicalFilePath="initcat">
+    <changeSet logicalFilePath="path-independent"  author="juanse.perez" id="1403012046173-1">
+        <insert tableName="category">
+            <column name="id" valueNumeric="1"/>
+            <column name="name" value="singer"/>
+        </insert>
+        <insert tableName="category">
+            <column name="id" valueNumeric="2"/>
+            <column name="name" value="guitarrist"/>
+        </insert>
+        <insert tableName="category">
+            <column name="id" valueNumeric="3"/>
+            <column name="name" value="bassist"/>
+        </insert>
+        <insert tableName="category">
+            <column name="id" valueNumeric="4"/>
+            <column name="name" value="drummer"/>
+        </insert>
+        <insert tableName="category">
+            <column name="id" valueNumeric="5"/>
+            <column name="name" value="other"/>
+        </insert>
+        <rollback>delete from category where id=1 or id=2 or id=3 or id=4 or id=5</rollback>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.2.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd"
+                   logicalFilePath="boot">
+
+    <changeSet logicalFilePath="path-independent"  author="juanse.perez" id="1403012036690-1">
+        <createTable tableName="category">
+            <column autoIncrement="true" name="id" type="INT(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet logicalFilePath="path-independent"  author="juanse.perez" id="1403012036690-2">
+        <createTable tableName="project">
+            <column autoIncrement="true" name="id" type="INT(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="category_id" type="INT(10)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet logicalFilePath="path-independent"  author="juanse.perez" id="1403012036690-3">
+        <createTable tableName="project_data">
+            <column autoIncrement="true" name="id" type="INT(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="description" type="VARCHAR(500)"/>
+            <column name="project_id" type="INT(10)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet logicalFilePath="path-independent"  author="juanse.perez" id="1403012036690-4">
+        <addForeignKeyConstraint baseColumnNames="project_id" baseTableName="project_data" constraintName="project_data_x_project" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="project"/>
+    </changeSet>
+    <changeSet logicalFilePath="path-independent"  author="juanse.perez" id="1403012036690-5">
+        <addForeignKeyConstraint baseColumnNames="category_id" baseTableName="project" constraintName="project_x_category" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="category"/>
+    </changeSet>
+    <changeSet logicalFilePath="path-independent"  author="juanse.perez" id="1403012036690-6">
+        <createView viewName="complete_project">(select `project`.`id` AS `id`,`project`.`name` AS `name`,`category`.`name` AS `category`,`project_data`.`description` AS `description` from ((`project` join `project_data` on((`project_data`.`project_id` = `project`.`id`))) join `category` on((`project`.`category_id` = `category`.`id`))))</createView>
+    </changeSet>
+</databaseChangeLog>
