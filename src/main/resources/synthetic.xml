@@ -8,13 +8,11 @@
 -->
 <synthetic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.xebialabs.com/deployit/synthetic" xsi:schemaLocation="http://www.xebialabs.com/deployit/synthetic synthetic.xsd">
 
-    <type type="liquibase.ExecutedChangelog" extends="generic.ExecutedScript" deployable-type="liquibase.Changelog" container-type="liquibase.Runner" description="Executed liquibase changelog">
-		<generate-deployable type="liquibase.Changelog" extends="generic.Folder" />
+    <type type="liquibase.ExecutedChangelog" extends="udm.BaseDeployedArtifact" deployable-type="liquibase.Changelog" container-type="liquibase.Runner" description="Executed liquibase changelog">
+		<generate-deployable type="liquibase.Changelog" extends="udm.BaseDeployableFolderArtifact" />
 		<property name="changeLogFile"/>
-		<property name="createScript" default="${deployed.container.updateScript}" hidden="true"/>
-		<property name="modifyScript" default="${deployed.container.updateScript}" hidden="true" />
-		<property name="destroyScript" default="${deployed.container.updateScript}" hidden="true"/>
-		<property name="noopScript" default="${deployed.container.updateScript}" hidden="true"/>   
+		<property name="rollbackVersion" kind="integer"/>
+		<property name="baseRollbackTag" default="xld_liquibase_base_version" hidden="true"/>
     </type>
 
     <type type="liquibase.Runner" extends="generic.Container" description="Liquibase runner">
@@ -25,12 +23,11 @@
 		<property name="databaseJDBCURL" label="Database URL" required="false"/>
 		<property name="databaseJDBCDriver" label="Database Driver" required="false"/>
 		<property name="liquibaseExtraArguments" description="Use to pass extra arguments to the liquibase command." required="false"/>
-		<property name="liquibaseConfigurationPath" required="false" default="liquibase.properties"/>
+		<property name="liquibaseConfigurationPath" required="false"/>
 		<property name="liquibaseJarPath" default="liquibase.jar"/>
 		<property name="javaCmd" default="java"/>
 		<property name="driverClasspath" required="false"/>
-		<property name="generatedSqlPath" required="false"/>
-		<method name="test" label="Test Liquibase" description="Test liquibase installation"/>          
+		<method name="test" label="Test Liquibase" description="Test liquibase installation"/>
     </type> 
 
 </synthetic>
