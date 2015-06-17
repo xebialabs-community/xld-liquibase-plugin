@@ -9,53 +9,27 @@ buildscript {
     }
 }
 
+version='5.0.0-SNAPSHOT'
+
 apply plugin: "com.github.hierynomus.license"
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'eclipse'
-apply plugin: 'maven'
 
-group = 'com.xebialabs.deployit.community'
-sourceCompatibility = 1.6
-targetCompatibility = 1.6
-version = '4.1.0'
-def apiVersion = '4.5.2'
-def xldeployHome = "$System.env.XLDEPLOY_HOME"
+license {
+    header rootProject.file('src/main/license/xebialabs_community.license')
+    strictCheck true
+}
 
 repositories {
     mavenLocal()
     mavenCentral()
-    maven {
-        credentials {
-            username 'community-plugins'
-            password 'community'
-        }
-        url 'http://nexus.xebialabs.com/nexus/content/repositories/releases'
-    }
-}
-
-configurations {
-    compile {
-        transitive = false
-    }
-    itestCompile { extendsFrom testCompile }
-    itestRuntime { extendsFrom itestCompile, testRuntime }
 }
 
 dependencies {
+    compile 'com.xebialabs.overthere:overtherepy:0.0.3'
     testCompile "org.hamcrest:hamcrest-core:1.2.1"
     testCompile "org.hamcrest:hamcrest-library:1.2.1"
-    itestCompile fileTree(dir: "$xldeployHome/lib", include: ['*.jar'])
-}
-
-sourceSets {
-    itest {
-        java {
-            srcDirs = ['src/test/itest']
-        }
-        compileClasspath = sourceSets.main.output + configurations.testCompile + configurations.itestCompile
-        runtimeClasspath = sourceSets.itest.output + configurations.itestCompile + sourceSets.main.output + configurations.itestRuntime
-    }
 }
 
 import org.apache.tools.ant.filters.*
@@ -67,32 +41,4 @@ processResources {
     ]
 }
 
-task sourcesJar(type: Jar) {
-    from sourceSets.main.allSource
-    classifier = 'sources'
-}
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = "javadoc"
-    from javadoc.destinationDir
-}
-
-artifacts {
-    archives sourcesJar, javadocJar
-}
-
-license {
-    header rootProject.file('src/main/license/xebialabs_community.license')
-    strictCheck true
-}
-
-task itest(dependsOn: 'itestClasses',type: Test) {
-    testClassesDir = sourceSets.itest.output.classesDir
-    classpath = sourceSets.itest.runtimeClasspath
-}
-
-itest.configure {
-    useJUnit() {
-    }
-}
 
