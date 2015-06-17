@@ -1,4 +1,6 @@
-# Liquibase plugin #
+# Liquibase plugin # 
+
+<img title="Build Status Images" src="https://api.travis-ci.org/xebialabs-community/xld-liquibase-plugin.svg?branch=master">
 
 This document describes the functionality provided by the Liquibase plugin.
 
@@ -8,7 +10,7 @@ See the **[XL Deploy Documentation](http://docs.xebialabs.com)** for background 
 
 The Liquibase plugin provides a simple way to use Liquibase in XLD.
 
-This plugin supports Liquibase rollbacks via a tagging.
+This plugin supports Liquibase 'roll back to' tag mode.
 
 ## Requirements
 
