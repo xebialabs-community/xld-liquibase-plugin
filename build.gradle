@@ -19,6 +19,7 @@ apply plugin: 'eclipse'
 license {
     header rootProject.file('src/main/license/xebialabs_community.license')
     strictCheck true
+    exclude('sample_dars/*')
 }
 
 repositories {
