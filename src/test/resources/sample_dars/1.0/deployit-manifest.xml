@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<udm.DeploymentPackage application="Liquibase" version="1.0">
+<udm.DeploymentPackage application="LiquibaseDemo" version="1.0">
   <applicationDependencies />
   <deployables>
     <liquibase.Changelog name="changesets" file="changesets">
