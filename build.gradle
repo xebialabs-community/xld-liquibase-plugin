@@ -23,10 +23,13 @@ repositories {
 }
 
 license {
-    header rootProject.file('src/main/license/xebialabs_community.license')
-    strictCheck true
-    exclude('sample_dars/*')
+  header rootProject.file('License.md')
+  strictCheck false
+  ext.year = Calendar.getInstance().get(Calendar.YEAR)
+  ext.name = 'XEBIALABS'
+  exclude('sample_dars/*')
 }
+
 
 dependencies {
     compile 'com.xebialabs.overthere:overtherepy:0.0.3'
