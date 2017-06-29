@@ -1,10 +1,29 @@
 # Liquibase plugin # 
 
-<img title="Build Status Images" src="https://api.travis-ci.org/xebialabs-community/xld-liquibase-plugin.svg?branch=master">
-
 This document describes the functionality provided by the Liquibase plugin.
 
 See the **[XL Deploy Documentation](http://docs.xebialabs.com)** for background information on XL Deploy and deployment concepts.
+
+## CI status
+
+[![Build Status][xld-liquibase-plugin-travis-image] ][xld-liquibase-plugin-travis-url]
+[![Codacy][xld-liquibase-plugin-codacy-image] ][xld-liquibase-plugin-codacy-url]
+[![Code Climate][xld-liquibase-plugin-code-climate-image] ][xld-liquibase-plugin-code-climate-url]
+[![License: MIT][xld-liquibase-plugin-license-image] ][xld-liquibase-plugin-license-url]
+[![Github All Releases][xld-liquibase-plugin-downloads-image] ]()
+
+
+[xld-liquibase-plugin-travis-image]: https://travis-ci.org/xebialabs-community/xld-liquibase-plugin.svg?branch=master
+[xld-liquibase-plugin-travis-url]: https://travis-ci.org/xebialabs-community/xld-liquibase-plugin
+[xld-liquibase-plugin-codacy-image]: https://api.codacy.com/project/badge/Grade/56e86b4f0faf4ca0a7ddfaf6c728d9c2
+[xld-liquibase-plugin-codacy-url]: https://www.codacy.com/app/joris-dewinne/xld-liquibase-plugin
+[xld-liquibase-plugin-code-climate-image]: https://codeclimate.com/github/xebialabs-community/xld-liquibase-plugin/badges/gpa.svg
+[xld-liquibase-plugin-code-climate-url]: https://codeclimate.com/github/xebialabs-community/xld-liquibase-plugin
+[xld-liquibase-plugin-license-image]: https://img.shields.io/badge/License-MIT-yellow.svg
+[xld-liquibase-plugin-license-url]: https://opensource.org/licenses/MIT
+[xld-liquibase-plugin-downloads-image]: https://img.shields.io/github/downloads/xebialabs-community/xld-liquibase-plugin/total.svg
+
+
 
 ## Overview
 
