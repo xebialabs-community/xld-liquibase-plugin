@@ -6,7 +6,7 @@ notifications:
 deploy:
   provider: releases
   api_key:
-    secure: X4EP+c2rfVLizQCWmj849RmhngwuuoRQmUrQdu/OQbNfVPYNaH7WjNY1UKWBjqWYpTFhdBwBXnm2xfRVKB//uTI0tOV6yKpaXftz/BZ5JEm5on1rZBo2JmokzKc/D1LXWy0UqYfKekQ7lD+EwPsS0OlRxtRU4mZ8dHpPMoAgm48=
+    secure: DegRwl8afRtv4G+iG15e+ZhOCk+H6kOe2lDZCMjpOcKqu9nM2uOSdSZN//gqVFoyiIISLdReQaeB1+sFYlxzxxgByLWjirkdzoCYhtGm6gHoQ9Ua+P80WdtJPwp4x9m+DXjiqu5JgoNiEVQ1BB/KedYXfY0pjR7Yvd5xbEvbNZQ=
   file: build/distributions/xld-liquibase-plugin-5.0.1-SNAPSHOT.xldp
   skip_cleanup: true
   on:
