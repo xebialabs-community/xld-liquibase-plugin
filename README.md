@@ -63,14 +63,22 @@ There are 2 versions of a sample dar available in the _test/resources/sample_dar
 ### Container _liquibase.Runner_
 A liquibase.Runner instance represents a liquibase installation. Below the configuration properties that needs to be set:
 
-* *databaseUsername*: username for the database to connect to (when left out it will use the value in the properties file)
-* *databasePassword*: password for the specified username (when left out it will use the value in the properties file)
-* *databaseJDBCURL*: JDBC connection URL (when left out it will use the value in the properties file)
-* *databaseJDBCDriver*: name of the JDBC driver to use (when left out it will use the value in the properties file)
-* *liquibaseJarPath*: path to the main liquibase jar file, i.e. liquibase.jar
-* *liquibaseConfigurationPath*: path to the liquibase configuration file, i.e liquibase.properties
-* *javaCmd*: command that will be used to launch liquibase java process. Default is "java"
-* *driverClasspath*: java classpath used to get database drivers
+* *databaseUsername*: username for the database to connect to (when left out it will use the value in the properties file).
+* *databasePassword*: password for the specified username (when left out it will use the value in the properties file).
+* *databaseJDBCURL*: JDBC connection URL (when left out it will use the value in the properties file).
+* *databaseJDBCDriver*: name of the JDBC driver to use (when left out it will use the value in the properties file).
+* *driverClasspath*: java classpath used to get database drivers.
+* *liquibaseLauncher*: Location of the Liquibase launch script. If this option is configured the options `liquibaseJarPath` and `javaCmd` will be ignored.
+* *liquibaseConfigurationPath*: path to the liquibase configuration file, i.e liquibase.properties.
+* *liquibaseExtraArguments*: Use to pass extra arguments to the liquibase command.
+* *liquibaseJarPath*: path to the main liquibase jar file, i.e. liquibase.jar.
+* *javaCmd*: command that will be used to launch liquibase java process. Default is "java".
+
+---
+**NOTE for Liquibase v4.11.0 and up**
+With Liquibase version v4.11.0 the [preferred way](https://docs.liquibase.com/workflows/liquibase-community/run-liquibase-without-launch-scripts.html) of starting Liquibase CLI is changed to a launcher script. Therefore the plugin provides the *liquibaseLauncher* option for `xld-liquibase-plugin` version 5.1.0 and up.
+If this option is configured the contents of *liquibaseJarPath* and *javaCmd* will be ignored. If you wish to use the previous `java -jar liquibase-core.jar` way leave the field *liquibaseLauncher* empty. If you do this with version v4.11.0 and up, provide a `LIQUIBASE_HOME` variable on the client somehow because this variable is required for this version and up.
+---
 
 ### Deployable _liquibase.Changelog_
 

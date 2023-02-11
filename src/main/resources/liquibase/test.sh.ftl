@@ -11,5 +11,5 @@
 -->
 
 #!/bin/sh
-${container.javaCmd} -jar ${container.liquibaseJarPath} --version
+<#if (container.liquibaseLauncher) >${container.liquibaseLauncher}<#else>${container.javaCmd} -jar ${container.liquibaseJarPath}</#if> --version
 

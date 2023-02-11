@@ -14,7 +14,10 @@ def none_or_empty(s):
     return StringUtils.empty(s)
 
 def build_cmd_line(container):
-    options = [container.javaCmd, '-jar', container.liquibaseJarPath]
+    if not none_or_empty(container.liquibaseLauncher):
+        options = [container.liquibaseLauncher]
+    else:
+        options = [container.javaCmd, '-jar', container.liquibaseJarPath]
     if not none_or_empty(container.driverClasspath):
         options.append("--classpath=%s" % container.driverClasspath)
     if not none_or_empty(container.databaseUsername):
