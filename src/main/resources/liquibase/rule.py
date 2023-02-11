@@ -1,5 +1,5 @@
 #
-# Copyright 2019 XEBIALABS
+# Copyright 2023 XEBIALABS
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 #
@@ -18,10 +18,10 @@ def apply_changelog_steps(d, ctx):
                         script='liquibase/apply_changelog.py',
                         jython_context={"container": d.container, "deployed": d})
     ctx.addStep(step)
-    step = steps.jython(description="Create deployment rollback tag [v%s] in liquibase [%s]" % (d.rollbackVersion, d.container.name),
+    step = steps.jython(description="Create deployment rollback tag [%s%s] in liquibase [%s]" % (d.rollbackVersionPrefix, d.rollbackVersion, d.container.name),
                         order=CREATE_RESOURCES,
                         script='liquibase/apply_tag.py',
-                        jython_context={"container": d.container, "tag": "v%s" % d.rollbackVersion})
+                        jython_context={"container": d.container, "tag": "%s%s" % (d.rollbackVersionPrefix, d.rollbackVersion)})
     ctx.addStep(step)
 
 
@@ -43,10 +43,10 @@ def handle_destroy(d, ctx):
 
 def handle_modify(pd, d, ctx):
     if d.rollbackVersion < pd.rollbackVersion:
-        step = steps.jython(description="Rollback to tag [v%s] in liquibase [%s]" % (d.rollbackVersion, d.container.name),
+        step = steps.jython(description="Rollback to tag [%s%s] in liquibase [%s]" % (d.rollbackVersionPrefix, d.rollbackVersion, d.container.name),
                             order=DESTROY_RESOURCES,
                             script='liquibase/apply_rollback.py',
-                            jython_context={"container": d.container, "tag": "v%s" % d.rollbackVersion, "deployed": pd})
+                            jython_context={"container": d.container, "tag": "%s%s" % (d.rollbackVersionPrefix, d.rollbackVersion), "deployed": pd})
         ctx.addStep(step)
     else:
         apply_changelog_steps(d, ctx)

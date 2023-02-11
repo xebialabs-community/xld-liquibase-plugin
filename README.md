@@ -1,4 +1,4 @@
-# Liquibase plugin # 
+# Liquibase plugin #
 
 This document describes the functionality provided by the Liquibase plugin.
 
@@ -80,8 +80,8 @@ A liquibase.Runner instance represents a liquibase installation. Below the confi
 
 ### Deployable _liquibase.Changelog_
 
-*liquibase.Changelog* is a folder artifact that contains all the xml liquibase changelog 
-files of the application package. 
+*liquibase.Changelog* is a folder artifact that contains all the xml liquibase changelog
+files of the application package.
 
 __PLEASE NOTE__ this plugin requires that each changeset be marked with the logicalFilePath attribute set. This is so that Liquibase will not take the file name that contains the changeset into consideration when writing database log changes, e.g
 <pre>
@@ -91,3 +91,4 @@ Properties :
 
 * *changeLogFile* specifies the entry point xml changelog file for liquibase.
 * *rollbackVersion* specifies the rollback version that will be used to apply a tag after successful changelog update.
+* *rollbackVersionPrefix* specifies the prefix added to the tag. Default is 'v'. The tag is composed as follows: <rollbackVersionPrefix><rollbackVersion>, for example: "v1" or "abc-1".
