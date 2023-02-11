@@ -2,7 +2,7 @@
 
 This document describes the functionality provided by the Liquibase plugin.
 
-See the **[XL Deploy Documentation](http://docs.xebialabs.com)** for background information on XL Deploy and deployment concepts.
+See the **[XL Deploy v22.3 Documentation](https://docs.digital.ai/bundle/devops-deploy-version-v.22.3/page/deploy/release-notes/releasemanual_deploy_v.22.3.html)** for background information on XL Deploy and deployment concepts.
 
 ## CI status
 
@@ -27,19 +27,13 @@ See the **[XL Deploy Documentation](http://docs.xebialabs.com)** for background 
 
 ## Overview
 
-The Liquibase plugin provides a simple way to use Liquibase in XLD.
+The Liquibase plugin provides a simple way to use Liquibase in XL Deploy.
 
 This plugin supports Liquibase 'roll back to' tag mode.
 
-## Requirements
-
-* **XL Deploy**: version 4.5.2+
-* **Other XL Deploy Plugins**
-	* [Overtherepy](https://github.com/xebialabs-community/overthere-pylib/releases/latest) version 0.3+
-
 ## Installation
 
-You need to install Liquibase on a host accessible by the XLD server.
+You need to install Liquibase on a host accessible by the XL Deploy server.
 
 ## Execution Logic
 

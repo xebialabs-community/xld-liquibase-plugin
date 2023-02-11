@@ -6,7 +6,7 @@ deploy:
   provider: releases
   api_key:
     secure: DegRwl8afRtv4G+iG15e+ZhOCk+H6kOe2lDZCMjpOcKqu9nM2uOSdSZN//gqVFoyiIISLdReQaeB1+sFYlxzxxgByLWjirkdzoCYhtGm6gHoQ9Ua+P80WdtJPwp4x9m+DXjiqu5JgoNiEVQ1BB/KedYXfY0pjR7Yvd5xbEvbNZQ=
-  file: build/distributions/xld-liquibase-plugin-5.0.1-SNAPSHOT.xldp
+  file: build/distributions/xld-liquibase-plugin-5.1.0.xldp
   skip_cleanup: true
   on:
     repo: xebialabs-community/xld-liquibase-plugin

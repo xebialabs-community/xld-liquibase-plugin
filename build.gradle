@@ -1,12 +1,11 @@
 import org.apache.tools.ant.filters.ReplaceTokens
 
 plugins {
-    id "com.github.hierynomus.license" version "0.15.0"
-    id "com.xebialabs.xldp" version "1.0.5"
-    id "com.xebialabs.xl.docker" version "1.1.0"
+  id "com.github.hierynomus.license" version "0.15.0"
+  id "com.xebialabs.xldp" version "1.0.5"
 }
 
-version='5.2.0-SNAPSHOT'
+version='5.1.0'
 
 defaultTasks 'build'
 apply plugin: 'java'
@@ -15,8 +14,14 @@ apply plugin: 'eclipse'
 apply plugin: 'maven'
 
 repositories {
-    mavenLocal()
-    mavenCentral()
+  mavenLocal()
+  mavenCentral()
+}
+
+configurations {
+  distBundle {
+    transitive = false
+  }
 }
 
 license {
@@ -27,18 +32,16 @@ license {
   exclude('sample_dars/*')
 }
 
-
 dependencies {
-    compile 'com.xebialabs.overthere:overtherepy:0.1.0'
-    testCompile "org.hamcrest:hamcrest-core:1.2.1"
-    testCompile "org.hamcrest:hamcrest-library:1.2.1"
+    compile 'com.xebialabs.overthere:overtherepy:0.0.4'
+    distBundle 'com.xebialabs.overthere:overtherepy:0.0.4'
 }
 
 processResources.configure {
-    filter ReplaceTokens, tokens: [
-            'project.version': version.toString(),
-            'project.name': rootProject.name
-    ]
+  filter ReplaceTokens, tokens: [
+    'project.version': version.toString(),
+    'project.name': rootProject.name
+  ]
 }
 
 
