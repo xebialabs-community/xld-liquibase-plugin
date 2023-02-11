@@ -74,11 +74,7 @@ A liquibase.Runner instance represents a liquibase installation. Below the confi
 * *liquibaseJarPath*: path to the main liquibase jar file, i.e. liquibase.jar.
 * *javaCmd*: command that will be used to launch liquibase java process. Default is "java".
 
----
-**NOTE for Liquibase v4.11.0 and up**
-With Liquibase version v4.11.0 the [preferred way](https://docs.liquibase.com/workflows/liquibase-community/run-liquibase-without-launch-scripts.html) of starting Liquibase CLI is changed to a launcher script. Therefore the plugin provides the *liquibaseLauncher* option for `xld-liquibase-plugin` version 5.1.0 and up.
-If this option is configured the contents of *liquibaseJarPath* and *javaCmd* will be ignored. If you wish to use the previous `java -jar liquibase-core.jar` way leave the field *liquibaseLauncher* empty. If you do this with version v4.11.0 and up, provide a `LIQUIBASE_HOME` variable on the client somehow because this variable is required for this version and up.
----
+__NOTE for Liquibase v4.11.0 and up__ With Liquibase version v4.11.0 the [preferred way](https://docs.liquibase.com/workflows/liquibase-community/run-liquibase-without-launch-scripts.html) of starting Liquibase CLI is changed to a launcher script. Therefore the plugin provides the *liquibaseLauncher* option for `xld-liquibase-plugin` version 5.1.0 and up. If this option is configured the contents of *liquibaseJarPath* and *javaCmd* will be ignored. If you wish to use the previous `java -jar liquibase-core.jar` way leave the field *liquibaseLauncher* empty. If you do this with version v4.11.0 and up, provide a `LIQUIBASE_HOME` variable on the client somehow because this variable is required for this version and up.
 
 ### Deployable _liquibase.Changelog_
 
