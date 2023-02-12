@@ -8,26 +8,40 @@
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
+# Default values must corrspond to synthetic.xml
 DESTROY_RESOURCES = 40
 CREATE_RESOURCES = 60
+MODIFY_RESOURCES = 40
 
+from overtherepy import StringUtils
+
+def none_or_empty(s):
+    return StringUtils.empty(s)
 
 def apply_changelog_steps(d, ctx):
+    if not none_or_empty(d.createOrder):
+        stepOrder=d.createOrder
+    else:
+        stepOrder=CREATE_RESOURCES
     step = steps.jython(description="Apply changelog [%s] in liquibase [%s]" % (d.name, d.container.name),
-                        order=CREATE_RESOURCES,
+                        order=stepOrder,
                         script='liquibase/apply_changelog.py',
                         jython_context={"container": d.container, "deployed": d})
     ctx.addStep(step)
     step = steps.jython(description="Create deployment rollback tag [%s%s] in liquibase [%s]" % (d.rollbackVersionPrefix, d.rollbackVersion, d.container.name),
-                        order=CREATE_RESOURCES,
+                        order=stepOrder,
                         script='liquibase/apply_tag.py',
                         jython_context={"container": d.container, "tag": "%s%s" % (d.rollbackVersionPrefix, d.rollbackVersion)})
     ctx.addStep(step)
 
 
 def handle_create(d, ctx):
+    if not none_or_empty(d.createOrder):
+        stepOrder=d.createOrder
+    else:
+        stepOrder=CREATE_RESOURCES
     step = steps.jython(description="Create initial deployment rollback tag [%s] in liquibase [%s]" % (d.baseRollbackTag, d.container.name),
-                        order=CREATE_RESOURCES,
+                        order=stepOrder,
                         script='liquibase/apply_tag.py',
                         jython_context={"container": d.container, "tag": d.baseRollbackTag})
     ctx.addStep(step)
@@ -35,16 +49,24 @@ def handle_create(d, ctx):
 
 
 def handle_destroy(d, ctx):
+    if not none_or_empty(d.destroyOrder):
+        stepOrder=d.destroyOrder
+    else:
+        stepOrder=DESTROY_RESOURCES
     step = steps.jython(description="Rollback to tag [%s] in liquibase [%s]" % (d.baseRollbackTag, d.container.name),
-                        order=DESTROY_RESOURCES,
+                        order=stepOrder,
                         script='liquibase/apply_rollback.py',
                         jython_context={"container": d.container, "tag": d.baseRollbackTag, "deployed": d})
     ctx.addStep(step)
 
 def handle_modify(pd, d, ctx):
+    if not none_or_empty(d.modifyOrder):
+        stepOrder=d.modifyOrder
+    else:
+        stepOrder=MODIFY_RESOURCES
     if d.rollbackVersion < pd.rollbackVersion:
         step = steps.jython(description="Rollback to tag [%s%s] in liquibase [%s]" % (d.rollbackVersionPrefix, d.rollbackVersion, d.container.name),
-                            order=DESTROY_RESOURCES,
+                            order=stepOrder,
                             script='liquibase/apply_rollback.py',
                             jython_context={"container": d.container, "tag": "%s%s" % (d.rollbackVersionPrefix, d.rollbackVersion), "deployed": pd})
         ctx.addStep(step)

@@ -15,10 +15,13 @@
 
     <type type="liquibase.ExecutedChangelog" extends="udm.BaseDeployedArtifact" deployable-type="liquibase.Changelog" container-type="liquibase.Runner" description="Executed liquibase changelog">
 		<generate-deployable type="liquibase.Changelog" extends="udm.BaseDeployableFolderArtifact" />
-		<property name="changeLogFile"/>
-		<property name="rollbackVersion" kind="integer"/>
-		<property name="rollbackVersionPrefix" kind="string" required="false" default="v" description="Prefix added to rollback tag. Default value 'v'"/>
-		<property name="baseRollbackTag" default="xld_liquibase_base_version" hidden="true"/>
+		<property name="changeLogFile" category="Liquibase parameters"/>
+		<property name="rollbackVersion" kind="integer" category="Liquibase parameters"/>
+		<property name="rollbackVersionPrefix" kind="string" required="false" default="v" description="Prefix added to rollback tag. Default value 'v'" category="Liquibase parameters"/>
+		<property name="baseRollbackTag" default="xld_liquibase_base_version" hidden="true" category="Liquibase parameters"/>
+		<property name="createOrder" label="Create order" kind="integer" default="60" category="Steplist order"/>
+		<property name="destroyOrder" label="Destroy order" kind="integer" default="40" category="Steplist order"/>
+		<property name="modifyOrder" label="Modify order" kind="integer" default="40" category="Steplist order"/>
     </type>
 
     <type type="liquibase.Runner" extends="generic.Container" description="Liquibase runner">
