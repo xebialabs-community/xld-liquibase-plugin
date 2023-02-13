@@ -91,6 +91,3 @@ Properties :
 * *changeLogFile* specifies the entry point xml changelog file for liquibase.
 * *rollbackVersion* specifies the rollback version that will be used to apply a tag after successful changelog update.
 * *rollbackVersionPrefix* specifies the prefix added to the tag. Default is 'v'. The tag is composed as follows: <rollbackVersionPrefix><rollbackVersion>, for example: "v1" or "abc-1".
-* *createOrder* Create order in the steplist, default is '60'.
-* *destroyOrder* Destroy order in the steplist, default is '40'.
-* *modifyOrder* Modify order in teh steplist, default is '40'.
