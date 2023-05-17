@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-    Copyright 2019 XEBIALABS
+    Copyright 2023 XEBIALABS
 
     Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
@@ -17,23 +17,25 @@
 		<generate-deployable type="liquibase.Changelog" extends="udm.BaseDeployableFolderArtifact" />
 		<property name="changeLogFile"/>
 		<property name="rollbackVersion" kind="integer"/>
+		<property name="rollbackVersionPrefix" kind="string" required="false" default="v" description="Prefix added to rollback tag. Default value 'v'"/>
 		<property name="baseRollbackTag" default="xld_liquibase_base_version" hidden="true"/>
     </type>
 
     <type type="liquibase.Runner" extends="generic.Container" description="Liquibase runner">
         <property name="updateScript"  hidden="true" default="liquibase/liquibase" />
 		<property name="testScript"  hidden="true" default="liquibase/test" />
-		<property name="databaseUsername" required="false"/>
-		<property name="databasePassword" password="true" required="false"/>
-		<property name="databaseJDBCURL" label="Database URL" required="false"/>
-		<property name="databaseJDBCDriver" label="Database Driver" required="false"/>
-		<property name="liquibaseExtraArguments" description="Use to pass extra arguments to the liquibase command." required="false"/>
-		<property name="liquibaseConfigurationPath" required="false"/>
-		<property name="liquibaseJarPath" default="liquibase.jar"/>
-		<property name="javaCmd" default="java"/>
-		<property name="driverClasspath" required="false"/>
+		<property name="databaseUsername" label="Database Username" required="false" description="Username for the database to connect to." category="Database parameters"/>
+		<property name="databasePassword" label="Database Password" password="true" required="false" description="Password for the specified username." category="Database parameters"/>
+		<property name="databaseJDBCURL" label="Database JDBC URL" required="false" description="JDBC connection URL for the database" category="Database parameters"/>
+		<property name="databaseJDBCDriver" label="Database Driver" required="false" description="Name of the JDBC driver to use" category="Database parameters"/>
+		<property name="driverClasspath" label="Database Driver Classpath" required="false" description="Java classpath used to get database drivers" category="Database parameters"/>
+		<property name="liquibaseLauncher" label="Liquibase launch script" description="Location of the Liquibase launch script" required="false"  category="Liquibase parameters"/>
+		<property name="liquibaseConfigurationPath" label="Configuration file" required="false" description="path to the liquibase configuration file." category="Liquibase parameters"/>
+		<property name="liquibaseExtraArguments" label="Extra commandline arguments" description="Use to pass extra arguments to the liquibase command." required="false" category="Liquibase parameters"/>
+		<property name="liquibaseJarPath" label="Liquibase.jar path" description="Location of the Liquibase jarfile" default="liquibase.jar" category="Liquibase compatibility"/>
+		<property name="javaCmd" label="Java command" description="Command that will be used to launch Liquibase java process." default="java" category="Liquibase compatibility"/>
 		<method name="test" label="Test Liquibase" description="Test liquibase installation"/>
-    </type> 
+    </type>
 
 </synthetic>
-   
+
